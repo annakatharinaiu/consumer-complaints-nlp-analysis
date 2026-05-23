@@ -1,9 +1,5 @@
 pandas
 numpy
 scikit-learn
-nltk
-spacy
-gensim
-pyldavis
 matplotlib
-seaborn
+kagglehub

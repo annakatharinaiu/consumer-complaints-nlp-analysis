@@ -1,0 +1,5 @@
+method,type,input,output,interpretation
+CountVectorizer,Vektorisierung,Bereinigte Texte,Worthäufigkeiten,Zeigt häufig vorkommende Begriffe im Korpus.
+TF-IDF,Vektorisierung,Bereinigte Texte,Gewichtete Begriffe,"Hebt Begriffe hervor, die für einzelne Texte besonders charakteristisch sind."
+LDA,Semantische Analyse / Topic Modeling,CountVectorizer-Matrix,Probabilistische Themen,Findet Themen auf Basis gemeinsamer Wortverteilungen.
+NMF,Semantische Analyse / Topic Modeling,TF-IDF-Matrix,Faktorbasierte Themen,Findet häufig gut interpretierbare Themen auf Basis gewichteter Begriffe.

@@ -1,0 +1,16 @@
+name: consumer-complaints-nlp-analysis
+channels:
+  - defaults
+dependencies:
+  - python=3.12
+  - pip
+  - pip:
+    - pandas
+    - numpy
+    - scikit-learn
+    - nltk
+    - spacy
+    - gensim
+    - pyldavis
+    - matplotlib
+    - seaborn

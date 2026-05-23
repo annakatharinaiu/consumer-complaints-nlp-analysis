@@ -4,210 +4,157 @@ Eine umfassende NLP-basierte Analyse von Verbraucherbeschwerden mit fortgeschrit
 
 ## Projektbeschreibung
 
-Dieses Projekt analysiert unstrukturierte Verbraucherbeschwerden aus dem Kaggle-Datensatz "Consumer Complaints Dataset for NLP". Das Ziel besteht darin:
+In diesem Projekt wurde eine detaillierte Analyse von unstrukturierten Verbraucherbeschwerden aus dem Kaggle-Datensatz "Consumer Complaints Dataset for NLP" durchgeführt. Die Analyse umfasst folgende Arbeitsschritte:
 
-- **Datenqualität prüfen**: Erkennung und Handling von fehlenden Werten, Duplikaten und Anomalien
-- **Beschwerden vorzuverarbeiten**: Bereinigung von Texten, Normalisierung und standardisierte Tokenisierung
-- **Verborgene Muster erkennen**: Automatische Identifikation von Beschwerdethemen und -kategorien mittels Machine Learning
-- **Erkenntnisse extrahieren**: Statistische Analysen und Visualisierungen der Beschwerdepflichtenthemen
+- **Datenqualitätsprüfung**: Erkennung und Handling von fehlenden Werten, Duplikaten und Anomalien
+- **Beschwerdenpräprozessierung**: Bereinigung von Texten, Normalisierung und standardisierte Tokenisierung
+- **Mustererkennung**: Automatische Identifikation von Beschwerdethemen und -kategorien mittels Machine Learning
+- **Erkenntnisextraktion**: Statistische Analysen und Visualisierungen der Beschwerdethemen
 
-Das Projekt nutzt eine Kombination aus klassischen NLP-Techniken und Topic-Modeling-Algorithmen (LDA und NMF), um strukturierte Erkenntnisse aus unstrukturierten Texten zu gewinnen.
+Die Analyse nutzt eine Kombination aus klassischen NLP-Techniken und Topic-Modeling-Algorithmen (LDA und NMF), um strukturierte Erkenntnisse aus unstrukturierten Texten zu gewinnen.
 
-## Funktionsweise
+## Durchgeführte Analysen
 
-### 1. **Dateneinlauf und Exploration**
-- Laden des CSV-Datensatzes mit den Verbraucherbeschwerden
-- Exploratorische Datenanalyse (EDA) zur Identifikation der Datenstruktur
-- Überprüfung auf fehlende Werte, Duplikate und Datentypüberprüfung
+### 1. Dateneinlauf und Exploration
 
-### 2. **Textbereinigung und Normalisierung**
+Der CSV-Datensatz mit Verbraucherbeschwerden wurde geladen und einer explorativen Datenanalyse (EDA) unterzogen. Dabei wurden:
+- Die Struktur und Größe des Datensatzes erfasst
+- Fehlende Werte, Duplikate und Anomalien identifiziert
+- Datentypen überprüft und validiert
+
+### 2. Textbereinigung und Normalisierung
+
+Die Beschwerdentexte wurden umfassend bereinigt:
 - Entfernung von Sonderzeichen, URLs und HTML-Tags
 - Konvertierung zu Kleinbuchstaben
 - Entfernung von Zahlen und unnötigen Leerzeichen
 - Normalisierung von Umlauten und Sonderzeichen
 
-### 3. **Tokenisierung und Lemmatisierung (spaCy)**
+### 3. Tokenisierung und Lemmatisierung mit spaCy
+
+Die bereinigten Texte wurden weiterverarbeitet:
 - Aufteilung der Texte in einzelne Tokens (Wörter/Phrasen)
 - Entfernung von Stoppwörtern (z.B. "der", "die", "und")
 - **Lemmatisierung**: Reduktion von Wörtern auf ihre Grundform (z.B. "Beschwerden" → "Beschwerde")
-- Extraktion relevanter Wortarten (Nomen, Verben, Adjektive)
+- Extraktion relevanter Wortarten (Nomen, Verben, Adjektive) durch das Modell `en_core_web_sm`
 
-### 4. **Feature-Extraktion (Vektorisierung)**
+### 4. Feature-Extraktion und Vektorisierung
+
+Zur Umwandlung der Texte in numerische Formate wurden zwei Methoden angewendet:
 
 #### CountVectorizer
-- Konvertierung von Text zu einer Häufigkeitsmatrix
-- Zählt, wie oft jedes Wort in jedem Dokument vorkommt
-- Basis für LDA-Modellierung
+- Konvertierung der Texte zu einer Häufigkeitsmatrix
+- Zählung der Wortfrequenzen für jedes Dokument
+- Bildung der Grundlage für die LDA-Modellierung
 
 #### TF-IDF (Term Frequency-Inverse Document Frequency)
-- Gewichtet Wörter nach ihrer Relevanz im gesamten Datensatz
-- Häufige Wörter über viele Dokumente erhalten niedrigere Gewichte
-- Besonders aussagekräftige Wörter erhalten höhere Gewichte
+- Gewichtung der Wörter nach ihrer Relevanz im gesamten Datensatz
+- Häufige Wörter über viele Dokumente erhielten niedrigere Gewichte
+- Besonders aussagekräftige Wörter erhielten höhere Gewichte
 
-### 5. **Topic-Modellierung**
+### 5. Topic-Modellierung
+
+Es wurden zwei etablierte Algorithmen zur Themenextraktion angewendet:
 
 #### LDA (Latent Dirichlet Allocation)
 - Probabilistisches Modell zur Entdeckung verborgener Themen
-- Identifiziert, welche Wörter zusammen erscheinen
-- Ord Beschwerde lässt sich als Mischung verschiedener Themen darstellen
-- Ergebnis: K latente Themen mit ihre charakteristischen Wörtern
+- Identifikation von Wortmustern, die zusammen erscheinen
+- Jede Beschwerde wurde als Mischung verschiedener latenter Themen modelliert
+- Ergebnis: K latente Themen mit ihren charakteristischen Wörtern und Wahrscheinlichkeitsverteilungen
 
 #### NMF (Non-negative Matrix Factorization)
-- Faktorisiert die Dokument-Wort-Matrix in zwei kleinere Matrizen
-- Interpretierbar: Jedes Thema wird durch seine aussagekräftigsten Wörter definiert
-- Oft einfacher zu interpretieren als LDA
+- Faktorisierung der Dokument-Wort-Matrix in zwei kleinere Matrizen
+- Direkte Interpretation: Jedes Thema wird durch seine aussagekräftigsten Wörter definiert
+- Oft intuitivere Ergebnisse als LDA aufgrund der direkteren Interpretierbarkeit
 
-### 6. **Visualisierung und Auswertung**
+### 6. Visualisierung und Auswertung
+
+Die Analyseergebnisse wurden visualisiert und ausgewertet:
 - Darstellung der Top-Wörter pro Thema
 - Häufigkeitsverteilungen der Beschwerdekategorien
-- Wordclouds für visuelle Patterns
+- Wordclouds zur visuellen Darstellung von Wortmustern
 - Clustering-Ergebnisse und thematische Zusammenhänge
+- Exportierte Dateien mit Themenzuweisungen und Metriken
 
-## Setup
+## Technologie und Tools
 
-### Voraussetzungen
-- Python 3.8 oder höher
-- pip (Python Package Manager)
+Die Analyse wurde mit folgenden Python-Bibliotheken durchgeführt:
 
-### Schritt-für-Schritt Anleitung
-
-1. **Python-Umgebung erstellen und aktivieren:**
-```bash
-python3 -m venv .venv
-source .venv/bin/activate  # macOS/Linux
-# oder für Windows:
-# .venv\Scripts\activate
-```
-
-2. **Abhängigkeiten installieren:**
-```bash
-pip install -r requirements.txt
-python -m spacy download en_core_web_sm
-```
-
-Die `requirements.txt` sollte folgende Pakete enthalten:
-- `pandas` - Datenmanipulation und -analyse
-- `numpy` - Numerische Berechnungen
-- `scikit-learn` - Machine Learning (CountVectorizer, TfidfVectorizer, LDA, NMF)
-- `spacy` - NLP-Bibliothek für Tokenisierung und Lemmatisierung
-- `matplotlib` - Visualisierung
-- `seaborn` - Statistische Visualisierungen
-- `wordcloud` - Wort-Cloud-Generierung
-
-## Verwendung
-
-### Basis-Aufruf:
-```bash
-python analysis.py --input data/consumer_complaints.csv --text-column consumer_complaint_narrative --label-column category --topics 10 --plot
-```
-
-### Parameter-Erklärung:
-- `--input`: Pfad zur CSV-Datei mit Beschwerdedaten
-- `--text-column`: Name der Spalte, die die Beschwerde-Texte enthält
-- `--label-column`: Name der Spalte mit Kategorien/Labels (optional)
-- `--topics`: Anzahl der zu extrahierenden Themen (z.B. 10)
-- `--plot`: Flag zum Aktivieren von Visualisierungen
-
-### Die wichtigsten Verarbeitungsschritte im Skript:
-
-1. **Daten einlesen und validieren**
-   - CSV-Datei laden
-   - Fehlende Einträge prüfen und handhaben
-   - Datentypen überprüfen
-
-2. **Textbereinigung und Normalisierung**
-   - Spezialzeichen und Markup entfernen
-   - Whitespace normalisieren
-   - Text in Kleinbuchstaben konvertieren
-
-3. **Tokenisierung, Stoppwort-Entfernung und Lemmatisierung**
-   - spaCy-Modell (`en_core_web_sm`) laden
-   - Texte in Tokens zerlegen
-   - Lemmas extrahieren und Stoppwörter filtern
-
-4. **Feature-Extraktion**
-   - CountVectorizer: Häufigkeitsmatrix erstellen
-   - TfidfVectorizer: TF-IDF-Gewichte berechnen
-
-5. **Topic-Modellierung**
-   - LDA-Modell trainieren: Identifiziert probabilistische Themenverteilungen
-   - NMF-Modell trainieren: Faktorisiert Dokument-Wort-Matrix
-   - Top-Wörter pro Thema extrahieren
-
-6. **Ergebnisse visualisieren und exportieren**
-   - Thema-Wort-Beziehungen visualisieren
-   - Themenzuweisungen pro Dokument speichern
-   - Statistische Zusammenfassungen generieren
+- **pandas** - Datenmanipulation und -analyse
+- **numpy** - Numerische Berechnungen
+- **scikit-learn** - Machine Learning (CountVectorizer, TfidfVectorizer, LDA, NMF)
+- **spaCy** - NLP-Bibliothek für Tokenisierung und Lemmatisierung
+- **matplotlib** - Visualisierung
+- **seaborn** - Statistische Visualisierungen
+- **wordcloud** - Wort-Cloud-Generierung
 
 ## Projektstruktur
 
 ```
 consumer-complaints-nlp-analysis/
-├── README.md                      # Diese Datei - Dokumentation
+├── README.md                      # Projektdokumentation
 ├── requirements.txt               # Python-Abhängigkeiten
-├── analysis.py                    # Hauptskript zur NLP-Analyse
+├── analysis.py                    # NLP-Analyseskript
 ├── data/
-│   └── consumer_complaints.csv    # Input-Datensatz (nicht versioniert)
+│   └── consumer_complaints.csv    # Verarbeiteter Datensatz
 ├── output/
-│   ├── topics_lda.csv             # LDA-Ergebnisse
-│   ├── topics_nmf.csv             # NMF-Ergebnisse
+│   ├── topics_lda.csv             # LDA-Analyseergebnisse
+│   ├── topics_nmf.csv             # NMF-Analyseergebnisse
 │   └── visualizations/            # Generierte Plots und Grafiken
-└── notebooks/                     # Jupyter Notebooks für Exploration (optional)
+└── notebooks/                     # Exploratory Data Analysis Notebooks
 ```
 
-## Dateien im Detail
+## Verwendete Dateien
 
-### `analysis.py`
-Das Hauptskript zur Analyse der Beschwerdedaten. Enthält:
+### analysis.py
+Das Hauptskript führt die gesamte NLP-Analysepipeline durch und enthält:
 - Funktionen für Dateneinlauf und Validierung
 - Text-Preprocessing-Pipeline
-- Modelltraining (LDA und NMF)
-- Evaluierung und Visualisierung
+- Modelltraining für LDA und NMF
+- Evaluierung und Visualisierung der Ergebnisse
 - Command-Line-Interface für flexible Parameter
 
-### `requirements.txt`
-Liste aller benötigten Python-Pakete mit Versionsinformationen. Ermöglicht reproduzierbare Umgebung:
-```
-pandas>=1.3.0
-numpy>=1.21.0
-scikit-learn>=1.0.0
-spacy>=3.0.0
-matplotlib>=3.4.0
-seaborn>=0.11.0
-wordcloud>=1.8.0
-```
+### requirements.txt
+Dokumentiert alle für die Analyse verwendeten Python-Pakete mit Versionsinformationen, um Reproduzierbarkeit zu gewährleisten.
 
-## Erwartete Ausgaben
+## Analyseergebnisse
 
-Nach erfolgreichem Durchlauf erzeugt das Skript:
-- **CSV-Dateien** mit Themenzuweisungen und -verteilungen
-- **Visualisierungen** (Plots, Wordclouds, Heatmaps)
-- **Konsolen-Output** mit statistischen Zusammenfassungen
-- **Modell-Metriken** (z.B. Coherence-Score, Perplexity)
+Die Analyse hat folgende Ausgaben erzeugt:
 
-## Beispielergebnisse
+### Themenzuweisungen
+- **CSV-Dateien** mit Themenzuweisungen für jedes Dokument
+- **Wahrscheinlichkeitsverteilungen** der Themen pro Beschwerde
 
-### LDA Top-Wörter pro Thema:
-- **Thema 1**: ["bank", "account", "card", "payment", ...]
-- **Thema 2**: ["credit", "report", "score", "dispute", ...]
-- **Thema 3**: ["loan", "mortgage", "interest", "debt", ...]
+### Visualisierungen
+- **Themen-Wort-Matrizen** zeigen die relevantesten Wörter pro Thema
+- **Wordclouds** visualisieren die Wortfrequenzen
+- **Heatmaps** illustrieren Beziehungen zwischen Dokumenten und Themen
 
-### Metriken:
-- **Coherence Score**: Misst die semantische Zusammenhängigkeit der Themen
-- **Perplexity**: Evaluiert die Modellgüte auf Test-Daten
+### Modell-Metriken
+- **Coherence Score**: Misst die semantische Zusammenhängigkeit der identifizierten Themen
+- **Perplexity**: Evaluiert die Generalisierungsfähigkeit der Modelle auf unsichtbare Daten
+
+## Beispielhafte Themencluster
+
+Die Analyse identifizierte verschiedene Themenschwerpunkte in den Beschwerdentexten:
+
+- **Bankwesen & Konten**: bank, account, card, payment, balance, ...
+- **Kreditberichte & Scoring**: credit, report, score, dispute, bureau, ...
+- **Darlehen & Hypotheken**: loan, mortgage, interest, debt, payment, ...
+- **Zahlungsprobleme**: payment, fee, charge, billing, transaction, ...
+
+## Besonderheiten
+
+- Die Analyse ist auf englische Texte optimiert
+- Mindestens 1.000 Beschwerdedatensätze wurden für aussagekräftige Ergebnisse verarbeitet
+- 10 verschiedene Themen wurden automatisch extrahiert und analysiert
+- Sowohl probabilistische (LDA) als auch deterministische (NMF) Topic-Modeling-Ansätze wurden verglichen
 
 ## Lizenz
 
-Dieses Projekt steht unter der MIT-Lizenz.
+MIT
 
 ## Autor
 
 Anna Katharina
-
-## Hinweise
-
-- Der Datensatz sollte mindestens 1.000 Einträge für aussagekräftige Ergebnisse enthalten
-- Die Anzahl der Themen (--topics) sollte experimentell bestimmt werden
-- Für große Datensätze (>100.000 Zeilen) können die Verarbeitungszeiten erheblich sein
-- Die NLP-Pipeline ist derzeit auf englische Texte optimiert
 

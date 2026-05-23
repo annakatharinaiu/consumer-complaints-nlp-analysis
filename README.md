@@ -60,7 +60,7 @@ Es wurden zwei etablierte Algorithmen zur Themenextraktion angewendet:
 - Probabilistisches Modell zur Entdeckung verborgener Themen
 - Identifikation von Wortmustern, die zusammen erscheinen
 - Jede Beschwerde wurde als Mischung verschiedener latenter Themen modelliert
-- Ergebnis: K latente Themen mit ihren charakteristischen Wörtern und Wahrscheinlichkeitsverteilungen
+- Ergebnis: K latente Themen mit ihren charakteristischen Wörtern 
 
 #### NMF (Non-negative Matrix Factorization)
 - Faktorisierung der Dokument-Wort-Matrix in zwei kleinere Matrizen

@@ -150,9 +150,7 @@ Die Analyse identifizierte verschiedene Themenschwerpunkte in den Beschwerdentex
 - 10 verschiedene Themen wurden automatisch extrahiert und analysiert
 - Sowohl probabilistische (LDA) als auch deterministische (NMF) Topic-Modeling-Ansätze wurden verglichen
 
-## Lizenz
 
-MIT
 
 ## Autor
 

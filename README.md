@@ -334,11 +334,7 @@ python -m pip install -r requirements.txt
 python analysis.py --topics 5 --plot
 ```
 
-Falls es mit `python` nicht funktioniert:
 
-```bash
-python3 -m pip install -r requirements.txt
-python3 analysis.py --topics 5 --plot
 ```
 
 ---

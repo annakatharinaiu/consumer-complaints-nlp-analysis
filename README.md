@@ -18,7 +18,6 @@ Alternativ kann auch eine lokale CSV-Datei verwendet werden.
 
 Dieses Projekt erfüllt folgende Anforderungen:
 
-- Einrichtung eines offenen GitHub-Repositories zur Versionskontrolle
 - Dokumentation der benötigten Python-Abhängigkeiten in `requirements.txt`
 - Laden eines Consumer-Complaints-Datensatzes in eine Python-Umgebung
 - Bereinigung der Beschwerdetexte zu analysierbaren Textdaten
@@ -36,7 +35,7 @@ Dieses Projekt erfüllt folgende Anforderungen:
 
 In diesem Projekt werden unstrukturierte Verbraucherbeschwerden aus einem Kaggle-Datensatz analysiert. Die Analyse umfasst folgende Arbeitsschritte:
 
-1. Laden der Daten über Kaggle oder aus einer lokalen CSV-Datei
+1. Laden der Daten über Kaggle 
 2. Erkennen der relevanten Textspalte
 3. Bereinigung der Beschwerdetexte
 4. Umwandlung der Texte in numerische Merkmale

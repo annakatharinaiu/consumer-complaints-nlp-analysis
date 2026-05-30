@@ -1,6 +1,6 @@
 # Consumer Complaints NLP Analysis
 
-Eine NLP-basierte Analyse von Verbraucherbeschwerden mit Python. Ziel des Projekts ist es, Beschwerdetexte automatisch zu laden, zu bereinigen, zu vektorisieren und mit Topic-Modeling-Verfahren häufige Themen zu extrahieren.
+Eine NLP-basierte Analyse von Verbraucherbeschwerden mit Python. Ziel des Projekts ist es, Beschwerdetexte automatisch zu laden, zu bereinigen, zu vektorisieren und mit Topic-Modeling-Verfahren häufig auftretende Themenbereiche zu identifizieren.
 
 Der Datensatz wird automatisch über Kaggle geladen:
 
@@ -89,7 +89,9 @@ Die Analyse verwendet folgende Python-Bibliotheken:
 consumer-complaints-nlp-analysis/
 ├── README.md
 ├── requirements.txt
+├── environment.yml
 ├── analysis.py
+├── .gitignore
 └── output/
     ├── cleaned_complaints.csv
     ├── top_terms_count.csv
@@ -211,21 +213,22 @@ Das Skript versucht automatisch, eine passende Textspalte zu erkennen. Unterstü
 - `consumer_complaint_narrative`
 - `Consumer complaint narrative`
 - `complaint_text`
-- `text`
+- `Complaint Text`
 - `narrative`
+- `text`
 - `description`
 
 Falls die automatische Erkennung nicht funktioniert, kann die Textspalte manuell über `--text-column` angegeben werden.
 
 ### 3. Textbereinigung
 
-Die Beschwerdetexte werden bereinigt. Dabei werden unter anderem:
+Die Beschwerdetexte werden bereinigt. Dabei werden:
 
 - Großbuchstaben in Kleinbuchstaben umgewandelt
 - URLs entfernt
-- Sonderzeichen entfernt
+- Sonderzeichen und Zahlen entfernt
 - überflüssige Leerzeichen entfernt
-- sehr kurze oder leere Texte entfernt
+- sehr kurze oder leere Texte entfernt (min. 10 Zeichen)
 
 Die bereinigten Texte werden in der Spalte `clean_text` gespeichert.
 
@@ -235,11 +238,11 @@ Zur Umwandlung der Texte in numerische Formate werden zwei Verfahren verwendet.
 
 #### CountVectorizer
 
-Der CountVectorizer zählt, wie häufig Wörter in den Texten vorkommen. Dadurch lassen sich häufige Begriffe im gesamten Textkorpus erkennen.
+Der CountVectorizer zählt, wie häufig Wörter in den Texten vorkommen. Dadurch lassen sich häufige Begriffe im gesamten Textkorpus erkennen. Englische Stopwords werden automatisch entfernt.
 
 #### TF-IDF
 
-TF-IDF gewichtet Wörter danach, wie charakteristisch sie für einzelne Texte sind. Begriffe, die in vielen Dokumenten häufig vorkommen, werden geringer gewichtet. Begriffe, die für einzelne Texte besonders typisch sind, erhalten ein höheres Gewicht.
+TF-IDF gewichtet Wörter danach, wie charakteristisch sie für einzelne Texte sind. Begriffe, die in vielen Dokumenten häufig vorkommen, werden geringer gewichtet. Begriffe, die für einzelne Texte besonders typisch sind, werden höher gewichtet. Englische Stopwords werden automatisch entfernt.
 
 ### 5. Semantische Analyse / Topic Modeling
 
@@ -247,11 +250,11 @@ Zur Themenextraktion werden zwei Verfahren verwendet.
 
 #### LDA
 
-LDA steht für Latent Dirichlet Allocation. Das Verfahren erkennt Themen auf Basis gemeinsamer Wortverteilungen. Es arbeitet auf der CountVectorizer-Matrix.
+LDA steht für Latent Dirichlet Allocation. Das Verfahren erkennt Themen auf Basis gemeinsamer Wortverteilungen. Es arbeitet auf der CountVectorizer-Matrix und liefert probabilistische Themenbereiche.
 
 #### NMF
 
-NMF steht für Non-negative Matrix Factorization. Das Verfahren extrahiert Themen auf Basis der TF-IDF-Matrix. Die Ergebnisse sind häufig gut interpretierbar, weil die Themen direkt über gewichtete Begriffe beschrieben werden.
+NMF steht für Non-negative Matrix Factorization. Das Verfahren extrahiert Themen auf Basis der TF-IDF-Matrix. Die Ergebnisse sind häufig gut interpretierbar, weil die Themen direkt über gewichtete Begriffe definiert werden.
 
 ---
 
@@ -265,19 +268,19 @@ Nach erfolgreicher Ausführung werden im Ordner `output/` folgende Dateien erzeu
 - `topics_lda.csv`
 - `topics_nmf.csv`
 - `method_comparison.csv`
-- `class_distribution.png`
+- `class_distribution.png` (nur mit `--plot`)
 
 ### Bedeutung der Dateien
 
 | Datei | Bedeutung |
 |---|---|
 | `cleaned_complaints.csv` | Datensatz mit bereinigter Textspalte `clean_text` |
-| `top_terms_count.csv` | Häufigste Begriffe nach CountVectorizer |
-| `top_terms_tfidf.csv` | Wichtigste Begriffe nach TF-IDF |
+| `top_terms_count.csv` | Top 20 häufigste Begriffe nach CountVectorizer |
+| `top_terms_tfidf.csv` | Top 20 wichtigste Begriffe nach TF-IDF |
 | `topics_lda.csv` | Extrahierte Themen mit LDA |
 | `topics_nmf.csv` | Extrahierte Themen mit NMF |
-| `method_comparison.csv` | Kurzer Vergleich der verwendeten Methoden |
-| `class_distribution.png` | Optionales Diagramm zur Verteilung der Kategorien |
+| `method_comparison.csv` | Tabellarischer Vergleich der verwendeten Methoden |
+| `class_distribution.png` | Optionales Balkendiagramm zur Verteilung der Kategorien |
 
 ---
 
@@ -287,8 +290,8 @@ Nach erfolgreicher Ausführung werden im Ordner `output/` folgende Dateien erzeu
 |---|---|---|---|---|
 | CountVectorizer | Vektorisierung | Bereinigte Texte | Worthäufigkeiten | Zeigt häufig vorkommende Begriffe im gesamten Korpus. |
 | TF-IDF | Vektorisierung | Bereinigte Texte | Gewichtete Begriffe | Hebt Begriffe hervor, die für einzelne Texte besonders charakteristisch sind. |
-| LDA | Semantische Analyse / Topic Modeling | CountVectorizer-Matrix | Probabilistische Themen | Erkennt Themen auf Basis gemeinsamer Wortverteilungen. |
-| NMF | Semantische Analyse / Topic Modeling | TF-IDF-Matrix | Faktorbasierte Themen | Liefert häufig gut interpretierbare Themen auf Basis gewichteter Begriffe. |
+| LDA | Semantische Analyse / Topic Modeling | CountVectorizer-Matrix | Probabilistische Themen | Findet breite Themenbereiche auf Basis gemeinsamer Wortverteilungen. |
+| NMF | Semantische Analyse / Topic Modeling | TF-IDF-Matrix | Faktorbasierte Themen | Findet häufig klarer interpretierbare Themen auf Basis gewichteter Begriffe. |
 
 ---
 
@@ -310,7 +313,7 @@ Die tatsächlichen Themen hängen vom verwendeten Datensatz, der Stichprobengrö
 
 Die Analyse dient als technische Demonstration einer vollständigen NLP-Pipeline. Die Ergebnisse sind abhängig von der Größe und Qualität des verwendeten Datensatzes.
 
-Bei kleineren Stichproben sind die extrahierten Themen nicht als endgültige fachliche Aussagen zu verstehen. Sie zeigen vor allem, dass die Daten erfolgreich geladen, bereinigt, vektorisiert und semantisch analysiert wurden.
+Bei kleineren Stichproben sind die extrahierten Themen nicht als endgültige fachliche Aussagen zu verstehen. Sie zeigen vor allem, dass die Daten erfolgreich geladen, bereinigt, vektorisiert und analysiert werden können.
 
 Für belastbare fachliche Aussagen wäre eine größere und repräsentative Datenbasis erforderlich.
 
@@ -334,11 +337,8 @@ python -m pip install -r requirements.txt
 python analysis.py --topics 5 --plot
 ```
 
-
-```
-
 ---
 
 ## Autorin
 
-Anna Katharina Schedler 
+Anna Katharina Schedler

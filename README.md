@@ -1,6 +1,6 @@
 # Consumer Complaints NLP Analysis
 
-Eine NLP-basierte Analyse von Verbraucherbeschwerden mit Python. Ziel des Projekts ist es, Beschwerdetexte automatisch zu laden, zu bereinigen, zu vektorisieren und mit Topic-Modeling-Verfahren häufig auftretende Themenbereiche zu identifizieren.
+Eine NLP-basierte Analyse von Verbraucherbeschwerden mit Python. Ziel des Projekts ist es, Beschwerdetexte automatisch zu laden, zu bereinigen, zu vektorisieren und mit Topic-Modeling-Verfahren häufig auftretende Themen zu identifizieren.
 
 Der Datensatz wird automatisch über Kaggle geladen:
 
@@ -242,7 +242,7 @@ Der CountVectorizer zählt, wie häufig Wörter in den Texten vorkommen. Dadurch
 
 #### TF-IDF
 
-TF-IDF gewichtet Wörter danach, wie charakteristisch sie für einzelne Texte sind. Begriffe, die in vielen Dokumenten häufig vorkommen, werden geringer gewichtet. Begriffe, die für einzelne Texte besonders typisch sind, werden höher gewichtet. Englische Stopwords werden automatisch entfernt.
+TF-IDF gewichtet Wörter danach, wie charakteristisch sie für einzelne Texte sind. Begriffe, die in vielen Dokumenten häufig vorkommen, werden geringer gewichtet. Begriffe, die für einzelne Texte spezifisch sind, werden höher gewichtet.
 
 ### 5. Semantische Analyse / Topic Modeling
 
@@ -250,11 +250,11 @@ Zur Themenextraktion werden zwei Verfahren verwendet.
 
 #### LDA
 
-LDA steht für Latent Dirichlet Allocation. Das Verfahren erkennt Themen auf Basis gemeinsamer Wortverteilungen. Es arbeitet auf der CountVectorizer-Matrix und liefert probabilistische Themenbereiche.
+LDA steht für Latent Dirichlet Allocation. Das Verfahren erkennt Themen auf Basis gemeinsamer Wortverteilungen. Es arbeitet auf der CountVectorizer-Matrix und liefert probabilistische Themenbereiche, in denen Wörter mit unterschiedlichen Stärken in mehreren Topics vorkommen können.
 
 #### NMF
 
-NMF steht für Non-negative Matrix Factorization. Das Verfahren extrahiert Themen auf Basis der TF-IDF-Matrix. Die Ergebnisse sind häufig gut interpretierbar, weil die Themen direkt über gewichtete Begriffe definiert werden.
+NMF steht für Non-negative Matrix Factorization. Das Verfahren extrahiert Themen auf Basis der TF-IDF-Matrix. Die Ergebnisse sind häufig gut interpretierbar, weil die Themen direkt über gewichtete Begriffe definiert werden und meist klarer voneinander abgegrenzt sind.
 
 ---
 
@@ -313,7 +313,7 @@ Die tatsächlichen Themen hängen vom verwendeten Datensatz, der Stichprobengrö
 
 Die Analyse dient als technische Demonstration einer vollständigen NLP-Pipeline. Die Ergebnisse sind abhängig von der Größe und Qualität des verwendeten Datensatzes.
 
-Bei kleineren Stichproben sind die extrahierten Themen nicht als endgültige fachliche Aussagen zu verstehen. Sie zeigen vor allem, dass die Daten erfolgreich geladen, bereinigt, vektorisiert und analysiert werden können.
+Bei kleineren Stichproben sind die extrahierten Themen nicht als endgültige fachliche Aussagen zu verstehen. Sie zeigen vor allem, dass die Daten erfolgreich geladen, bereinigt, vektorisiert und analysiert wurden.
 
 Für belastbare fachliche Aussagen wäre eine größere und repräsentative Datenbasis erforderlich.
 

@@ -1,4 +1,4 @@
-# Ergebnisse der Beispielanalyse
+# Ergebnisse der Analyse
 
 ## Setup
 
@@ -8,8 +8,8 @@
 
 ## Daten
 
-- Beispielhafte Textdaten werden in `data/sample_complaints.csv` bereitgestellt oder über Kaggle geladen.
-- Die Datei enthält narrative Beschwerdetexte und eine optionale Kategorialspalte.
+- Textdaten werden über Kaggle geladen oder aus einer lokalen CSV-Datei bereitgestellt.
+- Die Datei enthält narrative Beschwerdetexte und optionale Kategorialspalten.
 - Nach der Datenreinigung bleiben nur Texte mit mindestens 10 Zeichen erhalten.
 - Die Klassenverteilung ist je nach Datensatz unterschiedlich.
 
@@ -21,6 +21,7 @@ Die Textbereinigung umfasst folgende Schritte:
 - **Entfernung von URLs**: Hyperlinks werden entfernt.
 - **Entfernung von Sonderzeichen und Zahlen**: Nur alphabetische Zeichen und Leerzeichen bleiben erhalten.
 - **Bereinigung mehrfacher Leerzeichen**: Mehrere aufeinanderfolgende Leerzeichen werden zu einem Leerzeichen reduziert.
+- **Entfernung von Stopwords**: Englische Stopwords werden über scikit-learn bei der Vektorisierung entfernt.
 
 Die bereinigten Texte werden in der Spalte `clean_text` gespeichert.
 
@@ -72,13 +73,14 @@ Die Analyse erzeugt folgende Output-Dateien im Ordner `output/`:
 - `method_comparison.csv`: Tabellarischer Vergleich der verwendeten Methoden
 - `class_distribution.png`: Optionales Balkendiagramm der Kategorienhäufigkeit
 
-### Beobachtungen
+### Beobachtungen basierend auf den erzeugten Ergebnissen
 
-1. **CountVectorizer** zeigt die Baseline der häufigsten Wörter im gesamten Korpus.
-2. **TF-IDF** hebt speziellere und differenzierendere Begriffe hervor, die typisch für einzelne Beschwerden sind.
-3. **LDA** identifiziert breitere, probabilistische Themenbereiche mit überlappenden Wortkonstellationen.
-4. **NMF** liefert fokussiertere, oft distinctere Topics mit klareren Abgrenzungen zwischen den Themen.
+**CountVectorizer** zeigt eine klare Baseline der häufigsten Wörter im gesamten Korpus. Die Top-Begriffe sind: `credit` (10.091 Vorkommen), `account` (9.800), `report` (5.693), `payment` (3.660), `debt` (2.265), `loan` (2.169), `card` (2.113) und `bank` (1.917). Diese Verteilung offenbart, dass Verbraucherbeschwerden hauptsächlich um Kreditberichte, Konten, Zahlungen und Schuldenfragen kreisen.
 
-Die Ergebnisse demonstrieren, dass bereits mit klassischen NLP-Methoden aus unstrukturierten Beschwerdetexten strukturierte Einblicke gewonnen werden können. Die Qualität und Aussagekraft der Topics hängen stark von der Größe, Qualität und Diversity des Datensatzes sowie von den gewählten Parametern (z. B. `min_df`, `max_df`, Anzahl Topics) ab.
+**TF-IDF** hebt speziellere und differenzierendere Begriffe hervor. Neben den bereits häufigen Begriffen erscheinen charakteristische Terme wie `identity` (108,6), `bureau` (105,2) und `item` (117,7), was darauf hindeutet, dass Identitätsdiebstahl und Fehler in Kreditberichten zentrale Beschwerdethemen sind. TF-IDF gewichtet diese selteneren Begriffe höher, obwohl sie insgesamt weniger häufig vorkommen.
 
-Für vollständigere Analysen wird ein größerer und repräsentativer Datensatz empfohlen.
+**LDA** identifiziert breitere, probabilistische Themenbereiche. Die 10 Topics decken Themenkomplexe ab wie: (1) Kontoverwaltung und PayPal-Transaktionen, (2) Bank- und Kartenbetrug, (3) Kreditberichte und Bonitätsfragen, (4) Telefonische Kommunikation über Zahlungen, (5) Kreditschulden und Inkassoverfahren, (6) Kontodispute und Betrug, (7) Hypotheken und Darlehen, (8) Inkassopraxis und rechtliche Compliance, (9) Verbraucherschutzangelegenheiten, und (10) Identitätsdiebstahl und betrügerische Einträge. LDA erlaubt Überlappungen zwischen Topics.
+
+**NMF** liefert fokussiertere, oft distinctere Topics mit klareren Abgrenzungen. Die Topics konzentrieren sich auf: Kreditbericht-Fehler, Bankgebühren und Betrug, betrügerische Konten, Inkasso, Streitbeilegung, Identitätsdiebstahl, Kreditzahlungen und Hypotheken, unbefugte Kreditanfragen, unbekannte Konten und Kontodispute. NMF erzeugt thematisch stärker segmentierte Ergebnisse.
+
+Die Ergebnisse demonstrieren, dass bereits mit klassischen NLP-Methoden aus unstrukturierten Beschwerdetexten strukturierte Einblicke gewonnen werden können. Die Qualität und Aussagekraft der Topics hängen stark von der Größe und Repräsentativität des Datensatzes ab. Für vollständigere fachliche Analysen wird ein größerer Datensatz und eine Validierung durch Experten empfohlen.

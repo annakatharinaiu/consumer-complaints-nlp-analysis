@@ -1,12 +1,12 @@
-name: consumer-complaints-nlp-analysis
+name: consumer-complaints-nlp
 channels:
-  - defaults
+  - conda-forge
 dependencies:
-  - python=3.12
+  - python=3.11
+  - pandas
+  - numpy
+  - scikit-learn
+  - matplotlib
   - pip
   - pip:
-    - pandas
-    - numpy
-    - scikit-learn
-    - matplotlib
-    - kagglehub
+      - kagglehub

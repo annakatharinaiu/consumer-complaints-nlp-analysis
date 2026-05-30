@@ -33,3 +33,9 @@
 +defaults/noarch::pip-26.0.1-pyhc872135_1
 +defaults/noarch::tzdata-2026a-he532380_0
 # update specs: ['pip', 'python=3.12']
+==> 2026-05-30 07:45:25 <==
+# cmd: /opt/conda/bin/conda env create --file environment.yml --prefix ./venv --quiet
+# conda version: 26.1.1
+-defaults/noarch::pip-26.0.1-pyhc872135_1
++defaults/noarch::pip-26.1.1-pyhc872135_0
+# update specs: ['python=3.12', 'pip']

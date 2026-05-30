@@ -280,7 +280,7 @@ Nach erfolgreicher Ausführung werden im Ordner `output/` folgende Dateien erzeu
 | `topics_lda.csv` | Extrahierte Themen mit LDA |
 | `topics_nmf.csv` | Extrahierte Themen mit NMF |
 | `method_comparison.csv` | Tabellarischer Vergleich der verwendeten Methoden |
-| `class_distribution.png` | Optionales Balkendiagramm zur Verteilung der Kategorien |
+
 
 ---
 

@@ -1,5 +1,4 @@
 pandas
 numpy
 scikit-learn
-matplotlib
 kagglehub==0.3.13

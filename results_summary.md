@@ -46,3 +46,4 @@ Die Analyse erzeugt folgende Dateien im Ordner `output/`:
 ## Fazit
 
 Die Pipeline zeigt, dass mit klassischen NLP-Schritten und `scikit-learn` aus Verbraucherbeschwerden aussagekräftige Einblicke gewonnen werden können. CountVectorizer liefert häufige Begriffe, TF-IDF betont charakteristische Begriffe, LDA extrahiert breite Themen und NMF liefert oft klarer abgrenzbare Themen.
+

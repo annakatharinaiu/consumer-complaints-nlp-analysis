@@ -1,4 +1,4 @@
-name: consumer-complaints-nlp
+name: consumer-complaints-nlp-analysis
 channels:
   - conda-forge
 dependencies:
